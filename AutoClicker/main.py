@@ -6,10 +6,6 @@ from pynput.mouse import Button as pyB, Controller
 from pynput.keyboard import Listener, KeyCode, Key, Controller as C
 from tkinter import *
 
-#one swing
-minDelay = 2.4
-#4 swings and .1 seconds
-maxDelay = 9.7
 everyMinute = 60
 buttonLeftClick = pyB.left
 start_stop_key = KeyCode(char='=')
@@ -39,16 +35,90 @@ class ClickMouse(threading.Thread):
     def run(self):
         while self.program_running:
             while self.running:
-                delay = np.random.randint(minDelay,maxDelay)
-                #10% chance of storing ore
-                randPercent = np.random.randint(1,101)
-                if  randPercent>90:
-                    print('e clicked')
-                    keyboard.press('e')
-                    keyboard.release('e')
+                firemakingAutoClicker(self)                  #firemaking auto clicker
+                #fletchingAutoClicker(self)                  #fletching auto clicker
+                #miningAutoClicker()                    #mining auto clicker
+                #smithingAutoClicker()                  #smithing auto clicker
 
-                mouse.click(self.button)
-                time.sleep(delay)
+def fletchingAutoClicker(self):
+    #click bank
+    mouse.click(self.button)
+    #wait a second
+    time.sleep(1)
+    #grab preset one
+    keyboard.press('1')
+    keyboard.release('1')
+    #wait a second
+    time.sleep(1)
+    #select fletching toolbind
+    keyboard.press('1')
+    keyboard.release('1')
+    #wait a sec
+    time.sleep(1)
+    #select space
+    keyboard.press(Key.space)
+    keyboard.release(Key.space)
+    #wait a random delay
+    delay = np.random.randint(30 , 45)
+    time.sleep(delay)
+
+def firemakingAutoClicker(self):
+    #click bank
+    mouse.click(self.button)
+    #wait 3-6 seconds to run to and open bank
+    time.sleep(np.random.randint(3,6))
+    #grab preset one
+    keyboard.press('1')
+    keyboard.release('1')
+    #wait a second
+    time.sleep(2)
+    #select fletching toolbind
+    keyboard.press('1')
+    keyboard.release('1')
+    #wait a sec11
+    time.sleep(np.random.randint(1,2))
+    #click add to bonfire
+    mouse.click(self.button)
+    #wait a random delay
+    delay = np.random.randint(60,90)
+    time.sleep(delay)
+
+
+def miningAutoClicker(self):
+    # one swing
+    minDelay = 2.4
+    # 4 swings and .1 seconds
+    maxDelay = 9.7
+    delay = np.random.randint(minDelay, maxDelay)
+    # 10% chance of storing ore
+    randPercent = np.random.randint(1, 101)
+    if randPercent > 80:
+        print('e clicked')
+        keyboard.press('e')
+        keyboard.release('e')
+
+    time.sleep(1)
+    mouse.click(self.button)
+    time.sleep(delay)
+
+def smithingAutoClicker(self):
+    # 28ish bars
+    minDelay = 30
+    # 58ish bars
+    maxDelay = 60
+    # random time intween
+    delay = np.random.randint(minDelay, maxDelay)
+    # Click
+    mouse.click(self.button)
+    # wait a sec then click then space
+    time.sleep(1)
+    mouse.click(self.button)
+    time.sleep(1)
+    print('space=  clicked')
+    keyboard.press(Key.space)
+    keyboard.release(Key.space)
+
+    time.sleep(delay)
 
 def click():
     cm = ClickMouse()
